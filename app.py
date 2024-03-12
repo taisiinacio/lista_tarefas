@@ -13,6 +13,10 @@ db = client.lista_tarefas
 #acessa a collection
 tarefas = db.tarefas
 
+#
+
 todas_tarefas = tarefas.find()
 for t1 in todas_tarefas:
     print(t1)
+    
+    
