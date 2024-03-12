@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>FlaskApp</title>
     <style>
-        .todo {
+        .tarefa {
             padding: 20px;
             margin: 10px;
             background-color: #eee;
@@ -12,16 +12,16 @@
     </style>
 </head>
 <body>
-    <h1>FlaskTODO</h1>
+    <h1>Flasktarefa</h1>
     <hr>
     <div class="content">
     <form method="post">
         <p>
-            <b><label for="content">Todo content</label></b>
+            <b><label for="content">tarefa content</label></b>
         </p>
         <p>
             <input type="text" name="content"
-                placeholder="Todo Content"></input>
+                placeholder="tarefa Content"></input>
         </p>
 
         <p>
@@ -37,6 +37,13 @@
         </p>
         <button type="submit">Submit</button>
     </form>
+    <hr>
+    {% for tarefa in tarefas %}
+        <div class="tarefa">
+            <p>{{ tarefa['content'] }} <i>({{ tarefa['degree']}})</i></p>
+        </div>
+    {% endfor %}
+
     </div>
 </body>
 </html>

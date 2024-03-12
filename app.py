@@ -20,6 +20,13 @@ tarefas = db.tarefas
 #     print(t1)
 
 #método que renderiza a página principal da aplicação
-app.route('/', methods=('GET', 'POST'))
+@app.route('/', methods=('GET', 'POST'))
 def index():
-    return render_template('index.html')
+    if request.method=='POST':
+        content = request.form['content']
+        degree = request.form['degree']
+        tarefas.insert_one({'content': content, 'degree': degree})
+        return redirect(url_for('index'))
+
+    all_tarefas = tarefas.find()
+    return render_template('index.html', tarefas=all_tarefas)
