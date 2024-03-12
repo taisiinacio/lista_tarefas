@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, url_for, redirect
 from pymongo import MongoClient
+from bson.objectid import ObjectId
+
+
 
 #instancia a app Flask
 app = Flask('_name_')
@@ -30,3 +33,9 @@ def index():
 
     all_tarefas = tarefas.find()
     return render_template('index.html', tarefas=all_tarefas)
+
+
+@app.post('/<id>/delete/')
+def delete(id):
+    tarefas.delete_one({"_id": ObjectId(id)})
+    return redirect(url_for('index'))

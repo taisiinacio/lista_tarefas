@@ -41,6 +41,10 @@
     {% for tarefa in tarefas %}
         <div class="tarefa">
             <p>{{ tarefa['content'] }} <i>({{ tarefa['degree']}})</i></p>
+            <form method="POST" action="{{ url_for('delete', id=tarefa['_id']) }}" >
+                <input type="submit" value="Delete tarefa"
+                       onclick="return confirm('Are you sure you want to delete this entry?')">
+            </form>
         </div>
     {% endfor %}
 
