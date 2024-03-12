@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template, request, url_for, redirect
 from pymongo import MongoClient
 
 #instancia a app Flask
@@ -15,8 +15,11 @@ tarefas = db.tarefas
 
 #
 
-todas_tarefas = tarefas.find()
-for t1 in todas_tarefas:
-    print(t1)
-    
-    
+# todas_tarefas = tarefas.find()
+# for t1 in todas_tarefas:
+#     print(t1)
+
+#método que renderiza a página principal da aplicação
+app.route('/', methods=('GET', 'POST'))
+def index():
+    return render_template('index.html')
