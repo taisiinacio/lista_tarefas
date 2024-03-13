@@ -2,47 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FlaskApp</title>
-    <style>
-        .tarefa {
-            padding: 20px;
-            margin: 10px;
-            background-color: #eee;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tarefa.css') }}" media="screen"> 
+    <title>App Tarefas</title>
 </head>
 <body>
-    <h1>Flasktarefa</h1>
+    <h1>Lista Tarefas</h1>
     <hr>
     <div class="content">
     <form method="post">
         <p>
-            <b><label for="content">tarefa content</label></b>
+            <b><label for="nome">Descrição da Tarefa</label></b>
         </p>
         <p>
-            <input type="text" name="content"
-                placeholder="tarefa Content"></input>
-        </p>
-
-        <p>
-            <b><label for="degree">Degree</label></b>
+            <input type="text" name="nome"
+                placeholder="nome da tarefa"></input>
         </p>
         <p>
-            <input id="degree-0" name="degree" required type="radio" value="Important">
-            <label for="degree-0">Important</label>
+            <b><label for="data">Data</label></b>
         </p>
         <p>
-            <input id="degree-1" name="degree" required type="radio" value="Unimportant">
-            <label for="degree-1">Unimportant</label>
+            <input type="date" name="data"
+                placeholder="insira data"></input>
         </p>
-        <button type="submit">Submit</button>
+        <p>
+            <b><label for="status">Status</label></b>
+        </p>
+       
+        <p>
+            <input id="degree-0" name="status" required type="radio" value="Iniciar">
+            <label for="degree-0">Iniciar</label>
+        </p>
+        <p>
+            <input id="degree-1" name="status" required type="radio" value="Andamento">
+            <label for="degree-1">Andamento</label>
+        </p>
+        <p>
+            <input id="degree-1" name="status" required type="radio" value="Concluída">
+            <label for="degree-1">Concluída</label>
+        </p>
+        <button type="submit">Salvar</button>
     </form>
     <hr>
     {% for tarefa in tarefas %}
         <div class="tarefa">
-            <p>{{ tarefa['content'] }} <i>({{ tarefa['degree']}})</i></p>
+        <p>{{ tarefa['nome'] }} {{tarefa['data']}} <i>
+            ({{ tarefa['status']}})</i>
+        </p>
             <form method="POST" action="{{ url_for('delete', id=tarefa['_id']) }}" >
-                <input type="submit" value="Delete tarefa"
+                <input type="submit" value="Excluir tarefa"
                        onclick="return confirm('Are you sure you want to delete this entry?')">
             </form>
         </div>

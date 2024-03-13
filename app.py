@@ -26,13 +26,18 @@ tarefas = db.tarefas
 @app.route('/', methods=('GET', 'POST'))
 def index():
     if request.method=='POST':
-        content = request.form['content']
-        degree = request.form['degree']
-        tarefas.insert_one({'content': content, 'degree': degree})
+        nome = request.form['nome']
+        status = request.form['status']
+        data = request.form ['data']
+        tarefas.insert_one({'nome': nome, 'status': status, 'data': data})
         return redirect(url_for('index'))
 
     all_tarefas = tarefas.find()
     return render_template('index.html', tarefas=all_tarefas)
+
+#@app.app_template_filter('to_date')
+#def format_datetime(value):
+#  return value.strftime('%d/%m/%Y')
 
 
 @app.post('/<id>/delete/')
