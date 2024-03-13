@@ -10,7 +10,7 @@
     <h1>Lista Tarefas</h1>
     <hr>
     <div class="content">
-    <form method="post">
+    <form method="POST">
         <p>
             <b><label for="nome">Descrição da Tarefa</label></b>
         </p>
@@ -44,17 +44,30 @@
         <button type="submit">Salvar</button>
     </form>
     <hr>
-    {% for tarefa in tarefas %}
-        <div class="tarefa">
-        <p>{{ tarefa['nome'] }} {{tarefa['data']}} <i>
-            ({{ tarefa['status']}})</i>
-        </p>
-            <form method="POST" action="{{ url_for('delete', id=tarefa['_id']) }}" >
-                <input type="submit" value="Excluir tarefa"
+    <div>
+    <h3> Tarefas </h3>
+    <table>
+        <tr>
+          <th>Nome</th>
+          <th>Status</th>
+          <th>Data</th>
+          <th>Ações</th>
+        </tr>
+
+        {% for tarefa in tarefas %}
+        <tr>
+          <td>{{ tarefa['nome'] }}</td>
+          <td>{{ tarefa['status'] }} </td>
+          <td>{{ tarefa['data'] }}</td>
+          <td>
+            <form  method="POST" action="{{ url_for('delete', id=tarefa['_id']) }}" >
+                <input type="submit" value="Excluir"
                        onclick="return confirm('Are you sure you want to delete this entry?')">
             </form>
-        </div>
-    {% endfor %}
+          </td>
+        </tr>
+         {% endfor %}
+      </table>
 
     </div>
 </body>

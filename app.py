@@ -44,3 +44,4 @@ def index():
 def delete(id):
     tarefas.delete_one({"_id": ObjectId(id)})
     return redirect(url_for('index'))
+
