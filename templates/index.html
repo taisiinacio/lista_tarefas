@@ -65,6 +65,16 @@
                        onclick="return confirm('Are you sure you want to delete this entry?')">
             </form>
           </td>
+          <td>
+            <form  method="GET" action="{{ url_for('edit', id=tarefa['_id']) }}" >
+                <input type="submit" value="Editar"
+                       onclick="return confirm('Are you sure you want to delete this entry?')">
+            </form>
+          </td>
+
+
+
+
         </tr>
          {% endfor %}
       </table>

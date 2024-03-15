@@ -45,3 +45,18 @@ def delete(id):
     tarefas.delete_one({"_id": ObjectId(id)})
     return redirect(url_for('index'))
 
+
+@app.route('/<id>/edit/', methods=('GET', 'POST'))
+def edit(id):
+    if request.method=='POST':
+        nome = request.form['nome']
+        status = request.form['status']
+        data = request.form ['data']
+        tarefas.update_one({ "_id" : ObjectId(id)}, 
+                {'$set': { 'nome': nome, 'status': status, 'data': data} } )
+        return redirect(url_for('index'))
+
+    if request.method=='GET':
+        tarefa = tarefas.find_one({"_id": ObjectId(id)})
+
+        return render_template('edit.html', tarefa = tarefa)
