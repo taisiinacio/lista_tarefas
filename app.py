@@ -32,8 +32,8 @@ def index():
         tarefas.insert_one({'nome': nome, 'status': status, 'data': data})
         return redirect(url_for('index'))
 
-    all_tarefas = tarefas.find()
-    return render_template('index.html', tarefas=all_tarefas)
+    todas_tarefas = tarefas.find()
+    return render_template('index.html', tarefas=todas_tarefas)
 
 #@app.app_template_filter('to_date')
 #def format_datetime(value):
@@ -48,6 +48,12 @@ def delete(id):
 
 @app.route('/<id>/edit/', methods=('GET', 'POST'))
 def edit(id):
+
+    if request.method=='GET':
+        tarefa_selecionada = tarefas.find_one({"_id": ObjectId(id)})
+
+        return render_template('edit.html', tarefa = tarefa_selecionada)
+     
     if request.method=='POST':
         nome = request.form['nome']
         status = request.form['status']
@@ -55,8 +61,3 @@ def edit(id):
         tarefas.update_one({ "_id" : ObjectId(id)}, 
                 {'$set': { 'nome': nome, 'status': status, 'data': data} } )
         return redirect(url_for('index'))
-
-    if request.method=='GET':
-        tarefa = tarefas.find_one({"_id": ObjectId(id)})
-
-        return render_template('edit.html', tarefa = tarefa)
