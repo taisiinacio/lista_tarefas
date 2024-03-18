@@ -1,3 +1,5 @@
 pip install Flask pymongo 
 
 flask run
+
+flask --app app.py --debug run

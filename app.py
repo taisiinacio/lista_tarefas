@@ -40,7 +40,7 @@ def index():
 #  return value.strftime('%d/%m/%Y')
 
 
-@app.post('/<id>/delete/')
+@app.route('/<id>/delete/', methods=('GET', 'POST'))
 def delete(id):
     tarefas.delete_one({"_id": ObjectId(id)})
     return redirect(url_for('index'))
