@@ -33,7 +33,7 @@ def index():
         return redirect(url_for('index'))
 
     todas_tarefas = tarefas.find()
-    return render_template('index.html', tarefas=todas_tarefas)
+    return render_template('index.html', tarefa = {}, tarefas=todas_tarefas, btn_submit= "Cadastrar tarefa")
 
 #@app.app_template_filter('to_date')
 #def format_datetime(value):
@@ -51,8 +51,9 @@ def edit(id):
 
     if request.method=='GET':
         tarefa_selecionada = tarefas.find_one({"_id": ObjectId(id)})
+        todas_tarefas = tarefas.find()
 
-        return render_template('edit.html', tarefa = tarefa_selecionada)
+        return render_template('index.html', tarefa = tarefa_selecionada, tarefas=todas_tarefas, btn_submit= "Editar tarefa")
      
     if request.method=='POST':
         nome = request.form['nome']
