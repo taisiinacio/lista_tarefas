@@ -32,8 +32,10 @@ def index():
         tarefas.insert_one({'nome': nome, 'status': status, 'data': data})
         return redirect(url_for('index'))
 
-    todas_tarefas = tarefas.find()
-    return render_template('index.html', tarefa = {}, tarefas=todas_tarefas, btn_submit= "Cadastrar tarefa")
+    
+    tarefas_todas = tarefas.find({'status': { '$ne': 'Concluída' }})
+    tarefas_concluidas = tarefas.find({'status': { '$eq': 'Concluída' }})
+    return render_template('index.html', tarefa = {}, tarefas = tarefas_todas, btn_submit= "Cadastrar tarefa", tarefas_concluidas = tarefas_concluidas)
 
 #@app.app_template_filter('to_date')
 #def format_datetime(value):
@@ -45,6 +47,16 @@ def delete(id):
     tarefas.delete_one({"_id": ObjectId(id)})
     return redirect(url_for('index'))
 
+@app.route('/<id>/update/', methods=('GET', 'POST'))
+def update(id):
+    tarefas.update_one({"_id": ObjectId(id)},
+    {'$set': {'status': 'Concluída' } } )
+    
+    tarefas_todas = tarefas.find({'status': { '$ne': 'Concluída' }})
+    tarefas_concluidas = tarefas.find({'status': { '$eq': 'Concluída' }})
+    return redirect(url_for('index', tarefas = tarefas_todas, tarefas_concluidas = tarefas_concluidas ))
+
+   
 
 @app.route('/<id>/edit/', methods=('GET', 'POST'))
 def edit(id):

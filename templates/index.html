@@ -25,7 +25,8 @@
                 </div>
 
                 <div>
-                    <input type="text" name="nome" placeholder="Nome da tarefa" value="{{ tarefa['nome'] }}" required ></input>
+                    <input type="text" name="nome" placeholder="Nome da tarefa" value="{{ tarefa['nome'] }}"
+                        required></input>
                 </div>
 
                 <div>
@@ -33,7 +34,8 @@
                 </div>
 
                 <div>
-                    <input type="date" name="data" placeholder="insira data" value="{{ tarefa['data'] }}" required ></input>
+                    <input type="date" name="data" placeholder="insira data" value="{{ tarefa['data'] }}"
+                        required></input>
                 </div>
             </div>
             <fieldset class="row mb-3">
@@ -50,13 +52,6 @@
                         tarefa['status']=='Andamento' }}>
                     <label for="degree-1">Andamento</label>
                 </div>
-
-                <div>
-                    <input id="degree-1" name="status" required type="radio" value="Concluída" {{ "checked" if
-                        tarefa['status']=='Concluída' }}>
-                    <label for="degree-1">Concluída</label>
-                </div>
-
 
             </fieldset>
             <button type="submit" class="btn btn-outline-secondary">{{ btn_submit }}</button>
@@ -87,13 +82,18 @@
 
 
                     <td>
+                        <a class="btn btn-primary" href="{{ url_for('edit', id=tarefa['_id']) }}">
+                            <i class="bi bi-pencil"></i> Editar
+                        </a>
                         <a class="btn btn-primary" href="{{ url_for('delete', id=tarefa['_id']) }}"
                             onclick="return confirm('Você quer deletar esta tarefa?')">
                             <i class="bi bi-trash"></i> Excluir
                         </a>
-                        <a class="btn btn-primary" href="{{ url_for('edit', id=tarefa['_id']) }}">
-                            <i class="bi bi-pencil"></i> Editar
+                        <a class="btn btn-primary" href="{{ url_for('update', id=tarefa['_id']) }}"
+                            onclick="return confirm('Você quer concluir esta tarefa?')">
+                            <ion-icon name="checkmark-circle-outline"></ion-icon> Concluir
                         </a>
+
                     </td>
 
 
@@ -103,7 +103,27 @@
             </table>
 
         </div>
+        <hr size="6" color="#000080">
+        <div>
+            <h3> Concluídas </h3>
+            <table class="table table-striped">
+                <tr>
+                    <th>Nome</th>
+                    <th>Status</th>
+                    <th>Data</th>
+                </tr>
 
+                {% for tarefa9 in tarefas_concluidas %}
+                <tr>
+                    <td>{{ tarefa9['nome'] }}</td>
+                    <td>{{ tarefa9['status'] }} </td>
+                    <td>{{ tarefa9['data'] }}</td>
+
+                </tr>
+                {% endfor %}
+            </table>
+
+        </div>
 
 </body>
 
