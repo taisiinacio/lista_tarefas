@@ -25,8 +25,8 @@ Para rodar este projeto é necessário ter instalado um editor de código de sua
 
 ## Referência
 
-- [Utilizei este site como referncia para o desenvolvimento desta aplicação]
-(https://www.digitalocean.com/community/tutorials/how-to-use-mongodb-in-a-flask-application)
+- Utilizei este site como referência para o desenvolvimento desta aplicação:
+https://www.digitalocean.com/community/tutorials/how-to-use-mongodb-in-a-flask-application
 
 <!--LINK DAS BADGES:START-->
 [Python]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
